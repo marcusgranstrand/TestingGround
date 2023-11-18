@@ -9,8 +9,7 @@ namespace TestingGround.Classes
 	public class Methods
 	{
 		public static string seatingString = "";
-		public static string placeList = ",";
-		
+		public static string placeList = ",";		
 		
 		public static string? Age { get; set; }		
 				
@@ -22,8 +21,6 @@ namespace TestingGround.Classes
 			Console.WriteLine($"Tax: \t{tax:C}");
             Console.WriteLine($"Number of tickets: \t{numberOfTickets}");
 			Console.WriteLine($"Total sales amount: \t{salesAmount}");
-
-
         }		
 		
 		public static string AddPlace(int ticketNumber)
@@ -34,14 +31,23 @@ namespace TestingGround.Classes
             Console.WriteLine($"This is whats in the list: {placeList}\n");
 
 			return placeList;
-
         }
+
+		public static string RemovePlace(int ticketNumber)
+		{
+			string deleteNumber = Convert.ToString(ticketNumber);
+            Console.WriteLine($"deleteNumber is: {deleteNumber.Length}");
+            string temp = placeList.Remove(placeList.Length-(deleteNumber.Length+1)).ToString();
+			placeList = temp;
+
+			Console.WriteLine($"This is whats in the list: {placeList}\n");
+			return placeList;
+		}
 
 		public static int GetCustomerAge()
 		{
 			bool check = false;
-			//string age = "";
-
+			
 			while ( !check ) 
 			{
                 Console.WriteLine("Please enter your age: ");
@@ -50,7 +56,7 @@ namespace TestingGround.Classes
 				{
 					for (int i = 0; i < Age.Length; i++)
 					{
-						if (Age[i] > '0' && Age[i] <= '9')
+						if (Age[i] >= '0' && Age[i] <= '9')
 						{
 							check = true;
 						}

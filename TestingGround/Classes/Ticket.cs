@@ -8,29 +8,29 @@ using System.Threading.Tasks;
 namespace TestingGround.Classes
 {
 	public class Ticket
-	{
-		public decimal tax;
-		public int price = 0;		
-
+	{		
+		public decimal Tax {  get; set; }		
+		public int Price {  get; set; }
 		public int Age { get; set; }
         public EnumClass Place { get; set; }
         public int Number { get; set; }
 
         public Ticket(int age, EnumClass place)
 		{
+			//this.Price = Price;
 			this.Age = age;
 			this.Place = place;
 			this.Number = TicketSalesManager.NextTicketNumber();			
 		}
 
-		public int Price()
+		public int TicketPrice()
 		{
 			if (Age <= 11)
 			{
 				switch (Place)
 				{
-					case EnumClass.Seated: return price = 50;
-					case EnumClass.Standing: return price = 25;
+					case EnumClass.Seated: Price = 50; break;
+					case EnumClass.Standing: Price = 25; break;
 				}
 			}
 
@@ -38,8 +38,8 @@ namespace TestingGround.Classes
 			{
 				switch (Place)
 				{
-					case EnumClass.Seated: return price = 170;
-					case EnumClass.Standing: return price = 110;
+					case EnumClass.Seated: Price = 170; break;
+					case EnumClass.Standing: Price = 110; break;
 				}
 			}
 
@@ -47,19 +47,18 @@ namespace TestingGround.Classes
 			{
 				switch (Place)
 				{
-					case EnumClass.Seated: return price = 100;
-					case EnumClass.Standing: return price = 60;
+					case EnumClass.Seated: Price = 100; break;
+					case EnumClass.Standing: Price = 60; break;
 				}
 			}
-
-			return price;
-
+			
+			return Price;
 		}
 
-		public decimal Tax()
+		public decimal TicketTax()
 		{
-			tax = (decimal)((1-1/1.06) * Price());
-			return tax;
+			Tax = (decimal)((1-1/1.06) * TicketPrice());
+			return Tax;
 		}
 	}
 }

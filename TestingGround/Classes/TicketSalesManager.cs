@@ -9,9 +9,11 @@ namespace TestingGround.Classes
 {
 	public class TicketSalesManager
 	{
-		//public int numberOfTickets = 0;
-		
-		public List<Ticket> tickets { get; set; } = new List<Ticket>();		
+		public  int SumTotalSales { get; set; }
+		public int TotalSales { get; set; }		
+		public int TicketPrice { get; set; }
+		public int TicketCount { get; set; }
+		public static List<Ticket> tickets = new List<Ticket>();		
 
 		public static int NextTicketNumber()
 		{
@@ -19,7 +21,6 @@ namespace TestingGround.Classes
 			int ticketNumber = random.Next(1, 8000);
 						
 			return ticketNumber;
-
 		}
 				
 		public Ticket AddTicket(Ticket ticket)
@@ -29,36 +30,33 @@ namespace TestingGround.Classes
 		}
 		
 		public bool RemoveTicket(Ticket ticket)
-		{
-			bool listed = true;
-			tickets.Remove(ticket);
+		{	
+			bool listed = false;
 			if (tickets.Contains(ticket))
 			{
+				listed = true;
+                Console.WriteLine(listed);
+                tickets.Remove(ticket);
 				listed = false;
 			}
-			
-			return listed;
+            Console.WriteLine(listed);
+			SalesTotal();
+			AmountOfTickets();
+
+            return listed;
 		}
 		
 		public decimal SalesTotal()
-		{
-			decimal totalSales = 0.0m;
-			foreach (Ticket t in tickets)
+		{			
+			foreach (var item in tickets)
 			{
-				
-                //Console.WriteLine(t); ;
-			}
-
-			return totalSales;
+				TotalSales += item.Price;				
+            }
+			return TotalSales;
 		}
 
 		public int AmountOfTickets()
 		{
-			
-			foreach (Ticket t in tickets)
-			{
-				return tickets.Count;
-			}
 			return tickets.Count;
 		}
 	}

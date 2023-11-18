@@ -12,32 +12,33 @@ while (true)
 	Ticket ticket = new Ticket(objecta, objectb);
 	TicketSalesManager ticketSalesManager = new TicketSalesManager();
 	
-	var objectc = ticket.Price();
-	var objectd = ticket.Tax();
+	var objectc = ticket.TicketPrice();
+	var objectd = ticket.TicketTax();
 	var objecte = ticket.Number;
 
 	ticketSalesManager.AddTicket(ticket);
-	//ticketSalesManager.RemoveTicket(ticket);
+	
 	var objectf = ticketSalesManager.AmountOfTickets();
 	var objectg = ticketSalesManager.SalesTotal();			
 	
-	// Keeping the 3 lines directly below so I can see something when I testrun
-	Methods.Confirmation(objectc, objectd, objecte, objectf, objectg);
 	Methods.AddPlace(objecte);
 	
-	Console.WriteLine("Do you want to keep booking tickets: \nYes = Enter, Quit = Z");
+    Console.WriteLine("Do you want to change a booking: \n Yes = Y, No = N");
+	if(Console.ReadKey().Key == ConsoleKey.Y)
+	{
+		ticketSalesManager.RemoveTicket(ticket);
+		Methods.RemovePlace(objecte);
+	}
 
-	if (Console.ReadKey().Key == ConsoleKey.Z)
+	Console.WriteLine($"This is the totals:");
+	Methods.Confirmation(objectc, objectd, objecte, objectf, objectg);
+
+	Console.WriteLine("Do you want to keep booking tickets: \nYes = Enter, Quit = Q");
+
+	if (Console.ReadKey().Key == ConsoleKey.Q)
 	{
 		break;
 	}
 }
-
-Console.WriteLine($"This is the totals: \n");
-
-
-
-
-
 
 Console.ReadKey();
